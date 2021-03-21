@@ -105,6 +105,8 @@ class Trainer:
             batch_nids = nf.layer_parent_nid(-1).type(torch.long)
             logits = nn.functional.softmax(logits, dim=1).numpy()
             label_list = self.labels.cpu()[batch_nids]
+            print("logits: " + logits)
+            print("label_list" + label_list)
             for pred, label in zip(logits, label_list):
                 max_prob = pred.max().item()
                 if max_prob < self.params.unsure_rate / self.num_labels:
